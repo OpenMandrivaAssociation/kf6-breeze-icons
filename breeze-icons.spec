@@ -1,0 +1,47 @@
+Summary:	Breeze icon theme
+Name:		oxygen-icons
+Version:	5.17.0
+Release:	1
+License:	GPL
+Group:		Graphical desktop/KDE
+Url:		http://www.kde.org
+Source0:	http://download.kde.org/stable/frameworks/%(echo %{version} |cut -d. -f1-2)/%{name}-%{version}.tar.xz
+BuildRequires:	cmake(ECM)
+BuildArch:	noarch
+
+%description
+Breeze icon theme. Compliant with FreeDesktop.org naming schema.
+
+%files
+%{_iconsdir}/breeze
+%{_iconsdir}/breeze-dark
+# This is needed as hicolor is the fallback for icons
+%{_var}/lib/rpm/filetriggers/gtk-icon-cache-breeze.*
+
+#-----------------------------------------------------------------------------
+
+%prep
+%setup -q
+%cmake_kde5
+
+%build
+%ninja -C build
+
+%install
+%ninja_install -C build
+
+# automatic gtk icon cache update on rpm installs/removals
+# (see http://wiki.mandriva.com/en/Rpm_filetriggers)
+install -d %{buildroot}%{_var}/lib/rpm/filetriggers
+cat > %{buildroot}%{_var}/lib/rpm/filetriggers/gtk-icon-cache-breeze.filter << EOF
+^./usr/share/icons/breeze/
+^./usr/share/icons/breeze-dark/
+EOF
+cat > %{buildroot}%{_var}/lib/rpm/filetriggers/gtk-icon-cache-breeze.script << EOF
+#!/bin/sh
+if [ -x /usr/bin/gtk-update-icon-cache ]; then 
+  /usr/bin/gtk-update-icon-cache --force --quiet /usr/share/icons/breeze
+  /usr/bin/gtk-update-icon-cache --force --quiet /usr/share/icons/breeze-dark
+fi
+EOF
+chmod 755 %{buildroot}%{_var}/lib/rpm/filetriggers/gtk-icon-cache-breeze.script
