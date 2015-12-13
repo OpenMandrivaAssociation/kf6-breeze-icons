@@ -6,6 +6,7 @@ License:	GPL
 Group:		Graphical desktop/KDE
 Url:		http://www.kde.org
 Source0:	http://download.kde.org/stable/frameworks/%(echo %{version} |cut -d. -f1-2)/%{name}-%{version}.tar.xz
+Patch0:		fix-breeze-dark-inheritance.patch
 BuildRequires:	cmake(ECM)
 BuildArch:	noarch
 
@@ -17,11 +18,14 @@ Breeze icon theme. Compliant with FreeDesktop.org naming schema.
 %{_iconsdir}/breeze-dark
 # This is needed as hicolor is the fallback for icons
 %{_var}/lib/rpm/filetriggers/gtk-icon-cache-breeze.*
+%ghost %{_iconsdir}/breeze/icon-theme.cache
+%ghost %{_iconsdir}/breeze-dark/icon-theme.cache
 
 #-----------------------------------------------------------------------------
 
 %prep
 %setup -q
+%apply_patches
 %cmake_kde5
 
 %build
@@ -45,3 +49,5 @@ if [ -x /usr/bin/gtk-update-icon-cache ]; then
 fi
 EOF
 chmod 755 %{buildroot}%{_var}/lib/rpm/filetriggers/gtk-icon-cache-breeze.script
+
+touch  %{buildroot}%{_kf5_datadir}/icons/{breeze,breeze-dark}/icon-theme.cache
