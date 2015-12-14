@@ -51,4 +51,4 @@ fi
 EOF
 chmod 755 %{buildroot}%{_var}/lib/rpm/filetriggers/gtk-icon-cache-breeze.script
 
-touch  %{buildroot}%{_kf5_datadir}/icons/{breeze,breeze-dark}/icon-theme.cache
+touch  %{buildroot}%{_datadir}/icons/{breeze,breeze-dark}/icon-theme.cache
