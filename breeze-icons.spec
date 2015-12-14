@@ -1,5 +1,5 @@
 Summary:	Breeze icon theme
-Name:		oxygen-icons
+Name:		breeze-icons
 Version:	5.17.0
 Release:	1
 License:	GPL
