@@ -8,6 +8,7 @@ Url:		http://www.kde.org
 Source0:	http://download.kde.org/stable/frameworks/%(echo %{version} |cut -d. -f1-2)/%{name}-%{version}.tar.xz
 Patch0:		fix-breeze-dark-inheritance.patch
 BuildRequires:	cmake(ECM)
+BuildRequires:	pkgconfig(Qt5Test)
 BuildArch:	noarch
 
 %description
