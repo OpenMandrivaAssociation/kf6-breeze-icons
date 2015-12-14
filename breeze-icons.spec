@@ -15,8 +15,19 @@ BuildArch:	noarch
 Breeze icon theme. Compliant with FreeDesktop.org naming schema.
 
 %files
-%{_iconsdir}/breeze
-%{_iconsdir}/breeze-dark
+%dir %{_iconsdir}/breeze
+%dir %{_iconsdir}/breeze-dark
+%{_iconsdir}/breeze*/actions
+%{_iconsdir}/breeze*/applets
+%{_iconsdir}/breeze*/apps
+%{_iconsdir}/breeze*/categories
+%{_iconsdir}/breeze*/devices
+%{_iconsdir}/breeze*/emblems
+%{_iconsdir}/breeze*/emotes
+%{_iconsdir}/breeze*/mimetypes
+%{_iconsdir}/breeze*/places
+%{_iconsdir}/breeze*/status
+%{_iconsdir}/breeze*/index.theme
 # This is needed as hicolor is the fallback for icons
 %{_var}/lib/rpm/filetriggers/gtk-icon-cache-breeze.*
 %ghost %{_iconsdir}/breeze/icon-theme.cache
