@@ -9,6 +9,7 @@ Source0:	http://download.kde.org/stable/frameworks/%(echo %{version} |cut -d. -f
 Patch0:		fix-breeze-dark-inheritance.patch
 BuildRequires:	cmake(ECM)
 BuildRequires:	pkgconfig(Qt5Test)
+BuildRequires:	libxml2-utils
 BuildArch:	noarch
 
 %description
