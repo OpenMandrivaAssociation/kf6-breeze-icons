@@ -1,6 +1,6 @@
 Summary:	Breeze icon theme
 Name:		breeze-icons
-Version:	5.26.0
+Version:	5.27.0
 Release:	1
 License:	GPL
 Group:		Graphical desktop/KDE
