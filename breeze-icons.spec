@@ -1,6 +1,6 @@
 Summary:	Breeze icon theme
 Name:		breeze-icons
-Version:	5.28.0
+Version:	5.29.0
 Release:	1
 License:	GPL
 Group:		Graphical desktop/KDE
@@ -29,6 +29,7 @@ Breeze icon theme. Compliant with FreeDesktop.org naming schema.
 %{_iconsdir}/breeze*/places
 %{_iconsdir}/breeze*/status
 %{_iconsdir}/breeze*/index.theme
+%{_iconsdir}/breeze*/*.rcc
 # This is needed as hicolor is the fallback for icons
 %{_var}/lib/rpm/filetriggers/gtk-icon-cache-breeze.*
 %ghost %{_iconsdir}/breeze/icon-theme.cache
