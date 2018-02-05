@@ -1,7 +1,7 @@
 %define stable %([ "`echo %{version} |cut -d. -f3`" -ge 70 ] && echo -n un; echo -n stable)
 Summary:	Breeze icon theme
 Name:		breeze-icons
-Version:	5.42.0
+Version:	5.43.0
 Release:	1
 License:	GPL
 Group:		Graphical desktop/KDE
@@ -22,6 +22,7 @@ Breeze icon theme. Compliant with FreeDesktop.org naming schema.
 %dir %{_iconsdir}/breeze
 %dir %{_iconsdir}/breeze-dark
 %{_iconsdir}/breeze*/actions
+%{_iconsdir}/breeze*/animations
 %{_iconsdir}/breeze*/applets
 %{_iconsdir}/breeze*/apps
 %{_iconsdir}/breeze*/categories
