@@ -2,7 +2,7 @@
 Summary:	Breeze icon theme
 Name:		breeze-icons
 Version:	5.54.0
-Release:	1
+Release:	2
 License:	GPL
 Group:		Graphical desktop/KDE
 Url:		http://www.kde.org
@@ -53,6 +53,17 @@ Breeze icon theme. Compliant with FreeDesktop.org naming schema.
 %install
 %ninja_install -C build
 
+# (crazy) fix calamares not showing right icons here
+# reason is we use static names in /home for live user
+# that working fine for EN , but now we boot != EN
+# and the $HOME/ dirs are translated to whatever language.
+# in this case DE is using generic names and pulls $basename.svg
+# from theme , which are then the icons from here :)
+# We do not needed these , we provide own calamares icon so wipe away.
+
+rm -rf %{buildroot}%{_iconsdir}/breeze/apps/48/calamares.svg
+rm -rf %{buildroot}%{_iconsdir}/breeze-dark/apps/48/calamares.svg
+
 # automatic gtk icon cache update on rpm installs/removals
 # (see http://wiki.mandriva.com/en/Rpm_filetriggers)
 install -d %{buildroot}%{_var}/lib/rpm/filetriggers
@@ -62,7 +73,7 @@ cat > %{buildroot}%{_var}/lib/rpm/filetriggers/gtk-icon-cache-breeze.filter << E
 EOF
 cat > %{buildroot}%{_var}/lib/rpm/filetriggers/gtk-icon-cache-breeze.script << EOF
 #!/bin/sh
-if [ -x /usr/bin/gtk-update-icon-cache ]; then 
+if [ -x /usr/bin/gtk-update-icon-cache ]; then
   /usr/bin/gtk-update-icon-cache --force --quiet /usr/share/icons/breeze
   /usr/bin/gtk-update-icon-cache --force --quiet /usr/share/icons/breeze-dark
 fi
