@@ -1,7 +1,7 @@
 %define stable %([ "`echo %{version} |cut -d. -f3`" -ge 70 ] && echo -n un; echo -n stable)
 Summary:	Breeze icon theme
 Name:		breeze-icons
-Version:	5.73.0
+Version:	5.74.0
 Release:	1
 License:	GPL
 Group:		Graphical desktop/KDE
