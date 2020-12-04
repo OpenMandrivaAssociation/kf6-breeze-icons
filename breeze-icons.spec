@@ -2,7 +2,7 @@
 Summary:	Breeze icon theme
 Name:		breeze-icons
 Version:	5.76.0
-Release:	2
+Release:	3
 License:	GPL
 Group:		Graphical desktop/KDE
 Url:		http://www.kde.org
@@ -13,6 +13,7 @@ BuildRequires:	cmake(KF5Config)
 BuildRequires:	cmake(KF5IconThemes)
 BuildRequires:	pkgconfig(Qt5Test)
 BuildRequires:	libxml2-utils
+BuildRequires:	python-lxml
 BuildArch:	noarch
 Requires:	hicolor-icon-theme
 
@@ -62,7 +63,6 @@ Breeze icon theme. Compliant with FreeDesktop.org naming schema.
 rm -rf %{buildroot}%{_iconsdir}/breeze/apps/48/calamares.svg
 rm -rf %{buildroot}%{_iconsdir}/breeze-dark/apps/48/calamares.svg
 
-
 touch  %{buildroot}%{_datadir}/icons/{breeze,breeze-dark}/icon-theme.cache
 
 # automatic gtk icon cache update on rpm installs/removals
@@ -80,6 +80,7 @@ fi
 if [ -x /usr/bin/gtk-update-icon-cache ]; then
     gtk-update-icon-cache --force %{_datadir}/icons/breeze &>/dev/null || :
 fi
+
 %transfiletriggerpostun -- %{_datadir}/icons/breeze-dark
 if [ -x /usr/bin/gtk-update-icon-cache ]; then
     gtk-update-icon-cache --force %{_datadir}/icons/breeze-dark &>/dev/null || :
