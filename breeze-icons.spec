@@ -1,13 +1,12 @@
 %define stable %([ "`echo %{version} |cut -d. -f3`" -ge 70 ] && echo -n un; echo -n stable)
 Summary:	Breeze icon theme
 Name:		breeze-icons
-Version:	5.87.0
+Version:	5.88.0
 Release:	1
 License:	GPL
 Group:		Graphical desktop/KDE
 Url:		http://www.kde.org
 Source0:	http://download.kde.org/%{stable}/frameworks/%(echo %{version} |cut -d. -f1-2)/%{name}-%{version}.tar.xz
-Patch0:		fix-breeze-dark-inheritance.patch
 BuildRequires:	cmake(ECM)
 BuildRequires:	cmake(KF5Config)
 BuildRequires:	cmake(KF5IconThemes)
