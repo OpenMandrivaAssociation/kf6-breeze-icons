@@ -2,11 +2,13 @@
 Summary:	Breeze icon theme
 Name:		breeze-icons
 Version:	5.89.0
-Release:	1
+Release:	2
 License:	GPL
 Group:		Graphical desktop/KDE
 Url:		http://www.kde.org
 Source0:	http://download.kde.org/%{stable}/frameworks/%(echo %{version} |cut -d. -f1-2)/%{name}-%{version}.tar.xz
+Patch0:		https://invent.kde.org/frameworks/breeze-icons/-/commit/05f11af435edc57650d0221ed8a74ecfb997e576.patch
+Patch1:		https://invent.kde.org/frameworks/breeze-icons/-/commit/08bf45db9b883b4201ac3cbb666821472f17ad97.patch
 BuildRequires:	cmake(ECM)
 BuildRequires:	cmake(KF5Config)
 BuildRequires:	cmake(KF5IconThemes)
