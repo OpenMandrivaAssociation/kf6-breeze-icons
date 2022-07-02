@@ -1,4 +1,5 @@
-%define stable %([ "`echo %{version} |cut -d. -f3`" -ge 70 ] && echo -n un; echo -n stable)
+%define stable %([ "$(echo %{version} |cut -d. -f3)" -ge 70 ] && echo -n un; echo -n stable)
+
 Summary:	Breeze icon theme
 Name:		breeze-icons
 Version:	5.95.0
@@ -13,6 +14,7 @@ BuildRequires:	cmake(KF5IconThemes)
 BuildRequires:	pkgconfig(Qt5Test)
 BuildRequires:	libxml2-utils
 BuildRequires:	python-lxml
+BuildRequires:	util-linux-core
 BuildArch:	noarch
 Requires:	hicolor-icon-theme
 
@@ -62,25 +64,28 @@ Breeze icon theme. Compliant with FreeDesktop.org naming schema.
 rm -rf %{buildroot}%{_iconsdir}/breeze/apps/48/calamares.svg
 rm -rf %{buildroot}%{_iconsdir}/breeze-dark/apps/48/calamares.svg
 
-touch  %{buildroot}%{_datadir}/icons/{breeze,breeze-dark}/icon-theme.cache
+# (tpg) try reduce size
+hardlink -c -v %{buildroot}%{_iconsdir}
+
+touch  %{buildroot}%{_iconsdir}/{breeze,breeze-dark}/icon-theme.cache
 
 # automatic gtk icon cache update on rpm installs/removals
-%transfiletriggerin -- %{_datadir}/icons/breeze
+%transfiletriggerin -- %{_iconsdir}/breeze
 if [ -x /usr/bin/gtk-update-icon-cache ]; then
-    gtk-update-icon-cache --force %{_datadir}/icons/breeze &>/dev/null || :
+    gtk-update-icon-cache --force %{_iconsdir}/breeze &>/dev/null || :
 fi
 
-%transfiletriggerin -- %{_datadir}/icons/breeze-dark
+%transfiletriggerin -- %{_iconsdir}/breeze-dark
 if [ -x /usr/bin/gtk-update-icon-cache ]; then
-    gtk-update-icon-cache --force %{_datadir}/icons/breeze-dark &>/dev/null || :
+    gtk-update-icon-cache --force %{_iconsdir}/breeze-dark &>/dev/null || :
 fi
 
-%transfiletriggerpostun -- %{_datadir}/icons/breeze
+%transfiletriggerpostun -- %{_iconsdir}/breeze
 if [ -x /usr/bin/gtk-update-icon-cache ]; then
-    gtk-update-icon-cache --force %{_datadir}/icons/breeze &>/dev/null || :
+    gtk-update-icon-cache --force %{_iconsdir}/breeze &>/dev/null || :
 fi
 
-%transfiletriggerpostun -- %{_datadir}/icons/breeze-dark
+%transfiletriggerpostun -- %{_iconsdir}/breeze-dark
 if [ -x /usr/bin/gtk-update-icon-cache ]; then
-    gtk-update-icon-cache --force %{_datadir}/icons/breeze-dark &>/dev/null || :
+    gtk-update-icon-cache --force %{_iconsdir}/breeze-dark &>/dev/null || :
 fi
