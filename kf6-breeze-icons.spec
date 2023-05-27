@@ -44,7 +44,6 @@ Breeze icon theme. Compliant with FreeDesktop.org naming schema.
 %{_iconsdir}/breeze*/preferences
 %{_iconsdir}/breeze*/status
 %{_iconsdir}/breeze*/index.theme
-%{_iconsdir}/breeze*/*.rcc
 %ghost %{_iconsdir}/breeze/icon-theme.cache
 %ghost %{_iconsdir}/breeze-dark/icon-theme.cache
 
