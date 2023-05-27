@@ -1,17 +1,24 @@
 %define stable %([ "$(echo %{version} |cut -d. -f3)" -ge 70 ] && echo -n un; echo -n stable)
+%define git 20230527
 
 Summary:	Breeze icon theme
-Name:		breeze-icons
-Version:	5.106.0
-Release:	1
+Name:		kf6-breeze-icons
+Version:	5.240.0
+Release:	%{?git:0.%{git}.}1
 License:	GPL
 Group:		Graphical desktop/KDE
 Url:		http://www.kde.org
+%if 0%{?git:1}
+Source0:	https://invent.kde.org/frameworks/breeze-icons/-/archive/master/breeze-icons-master.tar.bz2#/breeze-icons-%{git}.tar.bz2
+%else
 Source0:	http://download.kde.org/%{stable}/frameworks/%(echo %{version} |cut -d. -f1-2)/%{name}-%{version}.tar.xz
+%endif
 BuildRequires:	cmake(ECM)
-BuildRequires:	cmake(KF5Config)
-BuildRequires:	cmake(KF5IconThemes)
-BuildRequires:	pkgconfig(Qt5Test)
+BuildRequires:	cmake(KF6Config)
+BuildRequires:	cmake(KF6IconThemes)
+BuildRequires:	cmake(Qt6)
+BuildRequires:	cmake(Qt6Core)
+BuildRequires:	cmake(Qt6Test)
 BuildRequires:	libxml2-utils
 BuildRequires:	python-lxml
 BuildRequires:	util-linux-core
@@ -44,11 +51,15 @@ Breeze icon theme. Compliant with FreeDesktop.org naming schema.
 #-----------------------------------------------------------------------------
 
 %prep
-%autosetup -p1
-%cmake_kde5
+%autosetup -p1 -n breeze-icons-%{?git:master}%{!?git:%{version}}
+%cmake \
+	-DBUILD_QCH:BOOL=ON \
+	-DBUILD_WITH_QT6:BOOL=ON \
+	-DKDE_INSTALL_USE_QT_SYS_PATHS:BOOL=ON \
+	-G Ninja
 
 %build
-%ninja -C build
+%ninja_build -C build
 
 %install
 %ninja_install -C build
