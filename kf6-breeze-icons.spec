@@ -1,5 +1,5 @@
 %define stable %([ "$(echo %{version} |cut -d. -f3)" -ge 70 ] && echo -n un; echo -n stable)
-%define git 20230609
+%define git 20230622
 
 Summary:	Breeze icon theme
 Name:		kf6-breeze-icons
