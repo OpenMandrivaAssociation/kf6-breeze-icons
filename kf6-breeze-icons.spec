@@ -22,6 +22,8 @@ BuildRequires:	cmake(Qt6Test)
 BuildRequires:	libxml2-utils
 BuildRequires:	python-lxml
 BuildRequires:	util-linux-core
+# Just to prevent the plasam5 version from being pulled in
+BuildRequires:	plasma6-xdg-desktop-portal-kde
 BuildArch:	noarch
 Requires:	hicolor-icon-theme
 
