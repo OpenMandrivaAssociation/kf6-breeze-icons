@@ -1,5 +1,5 @@
 %define stable %([ "$(echo %{version} |cut -d. -f3)" -ge 70 ] && echo -n un; echo -n stable)
-%define git 20230627
+%define git 20230706
 
 Summary:	Breeze icon theme
 Name:		kf6-breeze-icons
@@ -49,6 +49,17 @@ Breeze icon theme. Compliant with FreeDesktop.org naming schema.
 %ghost %{_iconsdir}/breeze/icon-theme.cache
 %ghost %{_iconsdir}/breeze-dark/icon-theme.cache
 
+#-----------------------------------------------------------------------------
+%package devel
+Summary:	Development files for Breeze Icons
+Group:		Development/KDE and Qt
+Requires:	%{name} = %{EVRD}
+
+%description devel
+Development files for Breeze Icons
+
+%files devel
+%{_libdir}/cmake/KF6BreezeIcons
 #-----------------------------------------------------------------------------
 
 %prep
