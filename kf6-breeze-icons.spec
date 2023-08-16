@@ -13,6 +13,7 @@ Source0:	https://invent.kde.org/frameworks/breeze-icons/-/archive/master/breeze-
 %else
 Source0:	http://download.kde.org/%{stable}/frameworks/%(echo %{version} |cut -d. -f1-2)/%{name}-%{version}.tar.xz
 %endif
+Patch0:		crap.patch
 BuildRequires:	cmake(ECM)
 BuildRequires:	cmake(KF6Config)
 BuildRequires:	cmake(KF6IconThemes)

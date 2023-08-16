@@ -1,0 +1,18 @@
+diff -up breeze-icons-master/generate-24px-versions.py.omv~ breeze-icons-master/generate-24px-versions.py
+--- breeze-icons-master/generate-24px-versions.py.omv~	2023-08-16 22:56:51.515602838 +0200
++++ breeze-icons-master/generate-24px-versions.py	2023-08-16 22:57:24.686934674 +0200
+@@ -96,7 +96,13 @@ def make_file(input_dir, output_dir, pat
+             os.symlink(symlink_source, file_destination)
+     else:
+         etree.set_default_parser(etree.XMLParser(remove_blank_text=True))
+-        tree = etree.parse(path)
++        tree = None
++        while tree is None:
++            try:
++                tree = etree.parse(path)
++            except Exception:
++                print("parse failed on " + path + ", retrying")
++                tree = None
+         root = tree.getroot()
+ 
+         viewBox_is_none = root.get('viewBox') is None
