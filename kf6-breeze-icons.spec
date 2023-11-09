@@ -1,9 +1,9 @@
-%define stable %([ "$(echo %{version} |cut -d. -f3)" -ge 70 ] && echo -n un; echo -n stable)
-%define git 20231103
+%define stable %([ "$(echo %{version} |cut -d. -f2)" -ge 80 -o "$(echo %{version} |cut -d. -f3)" -ge 80 ] && echo -n un; echo -n stable)
+#define git 20231103
 
 Summary:	Breeze icon theme
 Name:		kf6-breeze-icons
-Version:	5.240.0
+Version:	5.245.0
 Release:	%{?git:0.%{git}.}1
 License:	GPL
 Group:		Graphical desktop/KDE
@@ -11,7 +11,7 @@ Url:		http://www.kde.org
 %if 0%{?git:1}
 Source0:	https://invent.kde.org/frameworks/breeze-icons/-/archive/master/breeze-icons-master.tar.bz2#/breeze-icons-%{git}.tar.bz2
 %else
-Source0:	http://download.kde.org/%{stable}/frameworks/%(echo %{version} |cut -d. -f1-2)/%{name}-%{version}.tar.xz
+Source0:	http://download.kde.org/%{stable}/frameworks/%(echo %{version} |cut -d. -f1-3)/breeze-icons-%{version}.tar.xz
 %endif
 Patch0:		crap.patch
 BuildRequires:	cmake(ECM)
