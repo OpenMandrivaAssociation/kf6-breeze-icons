@@ -1,9 +1,9 @@
 %define stable %([ "$(echo %{version} |cut -d. -f2)" -ge 80 -o "$(echo %{version} |cut -d. -f3)" -ge 80 ] && echo -n un; echo -n stable)
-#define git 20231103
+%define git 20240217
 
 Summary:	Breeze icon theme
 Name:		kf6-breeze-icons
-Version:	5.249.0
+Version:	5.250.0
 Release:	%{?git:0.%{git}.}1
 License:	GPL
 Group:		Graphical desktop/KDE
