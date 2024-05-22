@@ -1,3 +1,7 @@
+# LTO doesn't work with the mechanism used to turn the icon
+# files into object files for the KF6BreezeIcons library
+%define _disable_lto 1
+
 %undefine _debugsource_packages
 %define major %(echo %{version} |cut -d. -f1-2)
 %define stable %([ "$(echo %{version} |cut -d. -f2)" -ge 80 -o "$(echo %{version} |cut -d. -f3)" -ge 80 ] && echo -n un; echo -n stable)
@@ -6,7 +10,7 @@
 Summary:	Breeze icon theme
 Name:		kf6-breeze-icons
 Version:	6.2.0
-Release:	%{?git:0.%{git}.}1
+Release:	%{?git:0.%{git}.}2
 License:	GPL
 Group:		Graphical desktop/KDE
 Url:		http://www.kde.org
@@ -25,11 +29,13 @@ BuildRequires:	cmake(Qt6Test)
 BuildRequires:	libxml2-utils
 BuildRequires:	python-lxml
 BuildRequires:	util-linux-core
-# Just to prevent the plasam5 version from being pulled in
+# Just to prevent the plasma5 version from being pulled in
 BuildRequires:	plasma6-xdg-desktop-portal-kde
-BuildArch:	noarch
 Requires:	hicolor-icon-theme
 Provides:	breeze-icons = %{EVRD}
+BuildSystem:	cmake
+BuildOption:	-DBUILD_QCH:BOOL=ON
+BuildOption:	-DICONS_LIBRARY:BOOL=ON
 
 %description
 Breeze icon theme. Compliant with FreeDesktop.org naming schema.
@@ -68,18 +74,8 @@ Development files for Breeze Icons
 
 %prep
 %autosetup -p1 -n breeze-icons-%{?git:master}%{!?git:%{version}}
-%cmake \
-	-DBUILD_QCH:BOOL=ON \
-	-DBUILD_WITH_QT6:BOOL=ON \
-	-DKDE_INSTALL_USE_QT_SYS_PATHS:BOOL=ON \
-	-G Ninja
 
-%build
-%ninja_build -C build
-
-%install
-%ninja_install -C build
-
+%install -a
 # (crazy) fix calamares not showing right icons here
 # reason is we use static names in /home for live user
 # that working fine for EN , but now we boot != EN
@@ -95,6 +91,9 @@ rm -rf %{buildroot}%{_iconsdir}/breeze-dark/apps/48/calamares.svg
 hardlink -c -v %{buildroot}%{_iconsdir}
 
 touch  %{buildroot}%{_iconsdir}/{breeze,breeze-dark}/icon-theme.cache
+
+%libpackages
+echo '%{_includedir}/KF6/BreezeIcons' >>%{specpartsdir}/%{mklibname -d KF6BreezeIcons}.specpart
 
 # automatic gtk icon cache update on rpm installs/removals
 %transfiletriggerin -- %{_iconsdir}/breeze
