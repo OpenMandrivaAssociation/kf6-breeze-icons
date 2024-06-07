@@ -9,8 +9,8 @@
 
 Summary:	Breeze icon theme
 Name:		kf6-breeze-icons
-Version:	6.2.0
-Release:	%{?git:0.%{git}.}2
+Version:	6.3.0
+Release:	%{?git:0.%{git}.}1
 License:	GPL
 Group:		Graphical desktop/KDE
 Url:		http://www.kde.org
@@ -19,7 +19,7 @@ Source0:	https://invent.kde.org/frameworks/breeze-icons/-/archive/master/breeze-
 %else
 Source0:	http://download.kde.org/%{stable}/frameworks/%{major}/breeze-icons-%{version}.tar.xz
 %endif
-Patch0:		crap.patch
+#Patch0:		crap.patch
 BuildRequires:	cmake(ECM)
 BuildRequires:	cmake(KF6Config)
 BuildRequires:	cmake(KF6IconThemes)
