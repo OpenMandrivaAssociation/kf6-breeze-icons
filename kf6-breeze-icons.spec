@@ -13,7 +13,7 @@ Version:	6.7.0
 Release:	%{?git:0.%{git}.}1
 License:	GPL
 Group:		Graphical desktop/KDE
-Url:		http://www.kde.org
+Url:		https://www.kde.org
 %if 0%{?git:1}
 Source0:	https://invent.kde.org/frameworks/breeze-icons/-/archive/master/breeze-icons-master.tar.bz2#/breeze-icons-%{git}.tar.bz2
 %else
