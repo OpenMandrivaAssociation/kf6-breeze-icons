@@ -10,7 +10,7 @@
 Summary:	Breeze icon theme
 Name:		kf6-breeze-icons
 Version:	6.12.0
-Release:	%{?git:0.%{git}.}1
+Release:	%{?git:0.%{git}.}2
 License:	GPL
 Group:		Graphical desktop/KDE
 Url:		https://www.kde.org
