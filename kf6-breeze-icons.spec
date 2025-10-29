@@ -10,7 +10,7 @@
 Summary:	Breeze icon theme
 Name:		kf6-breeze-icons
 Version:	6.19.0
-Release:	%{?git:0.%{git}.}1
+Release:	%{?git:0.%{git}.}2
 License:	GPL
 Group:		Graphical desktop/KDE
 Url:		https://www.kde.org
@@ -60,17 +60,6 @@ Breeze icon theme. Compliant with FreeDesktop.org naming schema.
 %ghost %{_iconsdir}/breeze-dark/icon-theme.cache
 
 #-----------------------------------------------------------------------------
-%package devel
-Summary:	Development files for Breeze Icons
-Group:		Development/KDE and Qt
-Requires:	%{name} = %{EVRD}
-
-%description devel
-Development files for Breeze Icons
-
-%files devel
-%{_libdir}/cmake/KF6BreezeIcons
-#-----------------------------------------------------------------------------
 
 %prep
 %autosetup -p1 -n breeze-icons-%{?git:master}%{!?git:%{version}}
@@ -94,6 +83,7 @@ touch  %{buildroot}%{_iconsdir}/{breeze,breeze-dark}/icon-theme.cache
 
 %libpackages
 echo '%{_includedir}/KF6/BreezeIcons' >>%{specpartsdir}/%{mklibname -d KF6BreezeIcons}.specpart
+sed -i -e '/^Requires:/iObsoletes: %{name}-devel < %{EVRD}' %{specpartsdir}/%{mklibname -d KF6BreezeIcons}.specpart
 
 # automatic gtk icon cache update on rpm installs/removals
 %transfiletriggerin -- %{_iconsdir}/breeze
