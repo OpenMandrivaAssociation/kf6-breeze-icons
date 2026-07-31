@@ -9,7 +9,7 @@
 
 Summary:	Breeze icon theme
 Name:		kf6-breeze-icons
-Version:	6.27.0
+Version:	6.28.0
 Release:	%{?git:0.%{git}.}1
 License:	GPL
 Group:		Graphical desktop/KDE
@@ -62,7 +62,7 @@ Breeze icon theme. Compliant with FreeDesktop.org naming schema.
 #-----------------------------------------------------------------------------
 
 %prep
-%autosetup -p1 -n breeze-icons-%{?git:master}%{!?git:%{version}}
+%autosetup -p1 -n breeze-icons-6.28.0
 
 %install -a
 # (crazy) fix calamares not showing right icons here
